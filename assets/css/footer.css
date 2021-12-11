@@ -1,0 +1,27 @@
+footer {
+  background-color: #4E5444;
+  position: fixed;
+  width: 100%;
+  height: 15vh;
+  bottom: 0; }
+
+#container-f {
+  font-size: 1.2em;
+  color: white;
+  padding: 10px;
+  display: flex;
+  align-items: center; }
+  #container-f ul {
+    display: flex;
+    flex-direction: column;
+    list-style: none;
+    padding: 0;
+    margin: 10px; }
+    #container-f ul li {
+      padding-left: 20px;
+      margin: 5px; }
+      #container-f ul li a {
+        color: white;
+        text-decoration: none; }
+        #container-f ul li a:hover {
+          color: red; }

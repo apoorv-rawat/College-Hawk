@@ -1,0 +1,23 @@
+<footer>
+    <div id="container-f">
+        <div id="dev-name">
+            &#169 Apoorv Rawat. All Rights Reserved 
+        </div>
+
+        <ul>
+            <li>
+                <a href="/">Home</a>
+            </li>
+            
+            <li>
+                <% if(locals.user) { %>
+                    <a href="/users/profile/<%= locals.user.id %>"><%= locals.user.name %> </a>
+                
+                <% }else{ %>
+
+                    <a href="/users/sign-in">Profile</a>
+                <% } %>
+            </li>
+        </ul>
+    </div>
+</footer>

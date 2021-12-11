@@ -1,0 +1,16 @@
+<div>
+    <p>Hi! <%= user.name %></p>
+
+    <p>
+        Your entry time was 
+        <%= log.entryTime.toLocaleTimeString() + " on " + log.entryTime.toDateString() %>
+    </p>
+
+    <img src="https://chart.googleapis.com/chart?cht=qr&chs=200x200&chl=<%= log._id %>&choe=UTF-8">
+
+    <p>
+        Please show the QR code on exit.
+        Thank you for visiting BPIT!
+    </p>
+
+</div>

@@ -1,0 +1,81 @@
+<h1>Sign up</h1>
+
+<form id="signupform" action="/users/create" method="POST">
+    <input type="text" name="name" placeholder="Your name" required>
+    <input type="email" name="email" placeholder="Your Email" required>    
+    <input type="password" name="password" placeholder="Password" required>
+    <input type="password" name="confirm_password" placeholder="Confirm Password" required>
+    
+    <br><br>
+
+    <select name="category" required style="width: 300px;" onchange="checkCategoryValue()">
+        <option value="" disabled selected>Choose Category</option>
+        <option value="Student">Student</option>
+        <option value="Admin">Admin</option>
+        <!-- <option value="Visitor">Visitor</option> -->
+    </select>
+
+    <br><br>
+
+    <input class="cat-conditional" style="display: none;" type="text" name="mobile" minlength="10" maxlength="10" placeholder="Mobile Number" >
+
+    <br>
+
+    <input class="cat-conditional" style="display: none;" type="text" name="enrollmentnumber" minlength="11" placeholder="Enrollment Number">
+
+    <br>
+
+    <select class="cat-conditional" name="vaccination" style="width: 300px; display: none;">
+        <option value="" disabled selected>Enter Vaccination Status</option>
+        <option value="0">Not taken any vaccine</option>
+        <option value="1">Dose 1 received</option>
+        <option value="Both">Dose 2 taken</option>
+    </select>
+
+    <br>
+
+    <input type="submit" value="Sign Up"> 
+
+</form>
+
+<script>
+
+    let category_ele = document.querySelector("select[name = 'category'] ");
+
+    function checkCategoryValue() {
+        
+        let eles = document.querySelectorAll('.cat-conditional');
+        
+        if(category_ele.value == 'Student') {
+            //show further form
+            eles.forEach(element => {
+                element.style.display = 'block'
+            });
+            
+        }else if(category_ele.value == 'Admin') {
+            eles.forEach(element => {
+                element.style.display = 'none'
+            });
+        }
+    }
+    
+    document.querySelector("#signupform input[type = 'submit']").addEventListener("click", function(event) {
+         
+        //  formValidator();
+    });
+
+    function formValidator() {
+        if(category_ele.val == 'Student') {
+            // validate vaccination, enumber, mobile
+            // let vac = 
+
+            let enumber = document.querySelector(" input[name = 'enumber'] ");
+            if(!enumber.value) {
+
+            }
+
+            console.log("Validator called");
+        }
+    }
+
+</script>

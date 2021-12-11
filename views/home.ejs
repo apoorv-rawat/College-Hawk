@@ -1,0 +1,195 @@
+<link rel="stylesheet" href="/css/home.css">
+<script type="text/javascript" src="https://rawgit.com/schmich/instascan-builds/master/instascan.min.js" ></script>	
+
+
+<div id="home-container">
+
+    <main>
+        <!-- <video width="400" height="400" src = "" class = "video-box">
+            Your device does not support video
+        </video>  -->
+        <video width="400" height="400" src = "" id="preview">
+            Your device does not support video
+        </video> 
+    </main>
+
+    <section id="feed-posts">
+
+        <div>
+            Welcome to BPIT College-Hawk!
+        </div>
+        
+        <br>
+    
+        <% if(locals.user && locals.user.category === 'Student') { %>
+
+            <div>
+                Hi <%= locals.user.name %>!
+            </div>
+            
+            <br>
+
+            <span><%= statusString %></span>
+
+            <br>
+            <form action="/logs/create" id="new-log-form" method="POST">
+                <!-- <textarea name="content" cols="30" rows="3" placeholder="Type here...." required></textarea> -->
+                <input type="text" name="temperature" placeholder="Enter current body temperature here"
+                style="width: 250px;" required>
+                <input type="hidden" name="action_reqd" value="<%= statusCode %>">
+                <button type="submit"><%= codeMap[statusCode] %></button>
+            </form>
+
+        <!-- <form action="/posts/create" id="new-post-form" method="POST">
+            <textarea name="content" cols="30" rows="3" placeholder="Type here...." required></textarea>
+            <input type="submit" value="Post">
+        </form> -->
+    
+        <% } else if(locals.user && locals.user.category === 'Admin') { %>
+
+            Hello <%= locals.user.name %>
+            <div style="margin: 20px;">
+                <a href="/users/monitor/logs/<%= locals.user._id %>">
+                <button>
+                    See logs
+                </button>
+                </a>
+            </div>
+
+            <div style="margin: 20px;">
+                <button>
+                    See all users
+                </button>
+            </div>
+
+
+        <% } else { %>
+            <!-- for now its admin and a visitor -->
+            <div>
+                Hello visitor!
+                <br>
+                Enter your email id / mobile number
+                and receive QR code for your visit.
+                (Entry Only)
+            </div>
+
+            <form action="/logs/create" id="new-log-form" method="POST">
+                <input type="text" name="name" placeholder="Enter your name here"
+                style="width: 250px;" required>
+                <input type="text" name="email" placeholder="Enter your email here"
+                style="width: 250px;" required>
+                <input type="text" name="temperature" placeholder="Enter current body temperature here"
+                style="width: 250px;" required>
+                <input type="text" name="purpose" placeholder="Enter purpose of your visit"
+                style="width: 250px;" required>
+                <br>
+                <input type="hidden" name="action_reqd" value=3>
+                <button type="submit">Check in</button>
+            </form>
+
+            <div>
+                <br>
+                <br>
+                <h2>OR</h2>
+
+                <br>
+                <br>
+
+                If you have already checked in and you want to check-out 
+                show QR code.
+
+                <form action="/logs/create" id="new-log-form" method="POST">
+                    <!-- <input type="text" name="temperature" placeholder="Enter current body temperature here"
+                    style="width: 250px;" required>
+                    <input type="hidden" name="action_reqd" value="visitor">
+                    <button type="submit">Check in</button> -->
+                </form>
+            </div>
+
+
+        <% } %>
+    
+        <div id="posts-list-container">
+            <ul>
+                <!-- <% for(post of posts) { %>
+    
+                    <%- include('_post') -%>
+    
+                <% } %> -->
+    
+            </ul>
+        </div>
+    </section>
+
+    <div id="check-in-out">
+       
+    </div>
+    
+    <!-- <section id="user-friends">
+    
+        <h4>Friends</h4>
+        <% for(u of all_users){ %>
+            <p>
+                <a href="/users/profile/<%= u.id %>"><%= u.name %></a>
+            </p>
+        <% } %>
+    
+    </section> -->
+
+</div>
+
+<!-- camera loading -->
+<!-- src="/js/home.js"> -->
+
+<!-- ajax for comments -->
+<script src="/js/home_comments.js"></script>
+
+<!-- ajax for posts -->
+<script src="/js/home_posts.js"></script>
+
+<!-- ajax for adding likes -->
+<script src="js/toggle_likes.js"></script>
+
+<!-- for already present post and comments apply class-->
+<script>
+    // console.log("Toggle like will be applied to all these",$('.toggle-like-button'));
+    // $('.toggle-like-button').each(function () {
+    //     let self = this;
+    //     let toggleLike = new ToggleLike(self);
+    // });
+</script>
+
+<script>
+
+    // script for QR Scanning 
+    // https://github.com/schmich/instascan#let-scanner--new-instascanscanneropts
+
+    let scanner = new Instascan.Scanner(
+        {
+            continuous: true,
+            // mirror: false,
+            // backgroundScan: false,
+            video: document.getElementById('preview')
+        }
+    );
+
+    scanner.addListener('scan', function(content) {
+        alert('You have successfully checked out. Thanks for visiting');
+        console.log(content);
+        window.open('/logs/visitorcheckout/' + content ,'_self');
+        // scanner.stop();
+        // fire up event of checkout
+    });
+
+    Instascan.Camera.getCameras().then(cameras => 
+    {
+        if(cameras.length > 0){
+            scanner.start(cameras[0]).then(function () {
+                console.log("Started");
+            });
+        } else {
+            console.error("No cameras found");
+        }
+    });
+
+</script>

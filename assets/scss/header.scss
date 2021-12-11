@@ -1,0 +1,40 @@
+header {
+    background-color: #4E5444;
+}
+
+#container-h {
+    font-size: 1.4em;
+    color: white;
+    padding: 10px;
+    // width: 98%;
+    margin: auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    ul {
+        display: flex;
+        list-style: none;
+        padding: 0;
+        margin: 0;
+    
+        li {
+            padding-left: 10px;
+            a {
+                color: white;
+                text-decoration: none   ;
+
+                &:hover {
+                    color: red;
+                }
+            }
+
+        }
+    }
+}
+
+#app-name {
+    font-size: 1.5em;
+    font-weight: bolder;
+}
+

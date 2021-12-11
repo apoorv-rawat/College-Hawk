@@ -1,0 +1,27 @@
+header {
+  background-color: #4E5444; }
+
+#container-h {
+  font-size: 1.4em;
+  color: white;
+  padding: 10px;
+  margin: auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center; }
+  #container-h ul {
+    display: flex;
+    list-style: none;
+    padding: 0;
+    margin: 0; }
+    #container-h ul li {
+      padding-left: 10px; }
+      #container-h ul li a {
+        color: white;
+        text-decoration: none; }
+        #container-h ul li a:hover {
+          color: red; }
+
+#app-name {
+  font-size: 1.5em;
+  font-weight: bolder; }

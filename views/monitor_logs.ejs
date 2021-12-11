@@ -1,0 +1,22 @@
+<div>
+    <h1>All logs</h1>
+</div>
+
+<div>
+    <% for(log of logs) { %>
+
+        Name -<%= log.user.name %>
+        <br>
+        Temperature recorded > <%= log.temperature %>
+        <br>
+        Entered premises at <%= log.entryTime.toLocaleTimeString() %> 
+        <br>
+        <% if(log.exitTime) { %>
+            Exited premises at <%= log.exitTime.toLocaleTimeString() %>
+        <% } %>
+        
+        <br>
+        <br>
+
+    <% } %>
+</div>

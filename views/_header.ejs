@@ -1,0 +1,35 @@
+<header>
+    
+    <div id="container-h">
+
+        <div id="app-name">
+            <a href="/" style="text-decoration: none; color: inherit;">College-HAWK</a>
+        </div>
+
+        <ul>
+            <% if(locals.user) { %>
+                
+                <li>
+                    <a href="/users/profile/<%= locals.user.id %>"><%= locals.user.name %> </a>
+                </li>
+
+                <li>
+                    <a href="/users/sign-out">Sign Out</a>
+                </li>
+
+            <% } else { %>
+
+                <li>
+                    <a href="/users/sign-in">Log In |</a>
+                </li>
+
+                <li>
+                    <a href="/users/sign-up">New User? Register</a>
+                </li>
+
+            <% } %>
+        </ul>
+
+    </div>
+    
+</header>
